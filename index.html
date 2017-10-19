@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Smart House</title>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+		<link media="all" rel="stylesheet" href="css/main.css">
+		<script type="text/javascript" src="js/handlebars-v4.0.11.js" defer></script>
+		<script type="text/javascript" src="js/main.js" defer></script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<header id="header">
+				<div class="container">
+					<h1> Your smart house</h1>
+				</div>
+			</header>
+			<main>
+				<div class="container">
+					<div class="holder">
+						<div class="box create-dev">
+							<h2>Choose your device</h2>
+							<div class="device" id="device">
+								<div class="img-box">
+									<img src="img/img1.jpg">
+								</div>
+								<div class="text-box">
+									<strong class="name">TV</strong>
+								</div>
+								<a href="#" class="btn-add" id="tv"></a>
+							</div>
+							<div class="device" id="device">
+								<div class="img-box">
+									<img src="img/img2.jpg">
+								</div>
+								<div class="text-box">
+									<strong class="name">Washing Machine</strong>
+								</div>
+								<a href="#" class="btn-add" id="washingmachine"></a>
+							</div>
+							<div class="device" id="device">
+								<div class="img-box">
+									<img src="img/img3.jpg">
+								</div>
+								<div class="text-box">
+									<strong class="name">Multicooker</strong>
+								</div>
+								<a href="#" class="btn-add" id="multicooker"></a>
+							</div>
+							<div class="device" id="device">
+								<div class="img-box">
+									<img src="img/img4.jpg">
+								</div>
+								<div class="text-box">
+									<strong class="name">Conditioner</strong>
+								</div>
+								<a href="#" class="btn-add" id="conditioner"></a>
+							</div>
+						</div>
+						<div class="box group-dev" id="SmartHouse">
+							<h2>Devices of your's smart home</h2>
+							<div class="controler-dev-holder" id="results">
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+		<script id="template" type="text/x-handlebars-template">
+			<div class="test">
+				<div class="row">
+					<strong class="field">Device name:</strong>
+					<span class="value title">{{name}}</span>
+				</div>
+				<div class="row add-value">
+					<strong class="field">Brand:</strong>
+					<div class="input-group">
+						<input type="text" placeholder="Enter value" />
+						<button type="button" class="btn success btn-apply">Apply</button>
+					</div>
+					<span class="value brand">{{brand}}</span>
+				</div>
+				<div class="row add-value">
+					<strong class="field">Location:</strong>
+					<label for="type{{id}}">Select Location</label>
+					<div class="input-group select">
+						<select id="type{{id}}">
+							<option>Location...</option>
+							<option>Kitchen</option>
+							<option>Common room</option>
+							<option>Bathroom</option>
+						</select>
+						<button type="button" class="btn success btn-apply">Apply</button>
+					</div>
+					<span class="value location">{{location}}</span>
+				</div>
+				<div class="row">
+					<div class="switch">
+						<input type="checkbox" name="switch" class="switch-checkbox" id="switch{{id}}" name="switch">
+						<label class="switch-label" for="switch{{id}}">
+							<span class="switch-inner"></span>
+							<span class="switch-switch"></span>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<strong class="field">Options:</strong>
+					<ul class="options-value">
+						{{#if temperature}}
+							<li class="add-value">
+								<label for="temperature">Input temperature</label>
+								<div class="input-group">
+									<input name='temperature' id='temperature' value="{{temperature}}" type='number'>
+									<button type="button" class="btn success btn-apply">Apply</button>
+								</div>
+								<span class="value">{{temperature}}</span>
+							</li>
+						{{/if}}
+						{{#if volume}}
+							<li class="add-value">
+								<span>Volume(0 - 100)</span>
+								<div class="input-group">
+									<input type="range" id="volume-bar{{id}}" title="volume" min="0" max="100" step="1" value="10">
+									<button type="button" class="btn success btn-apply">Apply</button>
+								</div>
+								<span class="value">{{volume}}</span>
+							</li>
+						{{/if}}
+						{{#if delayStart}}
+							<li class="add-value">
+								<span>Delayed start of operation</span>
+								<div class="input-group">
+									<input type="text" placeholder="Enter value" />
+									<button type="button" class="btn success btn-apply">Apply</button>
+								</div>
+								<span class="value">{{delayStart}}</span>
+							</li>
+						{{/if}}
+						{{#if timeOff}}
+							<li class="add-value">
+								<span>The time off</span>
+								<div class="input-group">
+									<input type="text"  placeholder="Enter value" />
+									<button type="button" class="btn success btn-apply">Apply</button>
+								</div>
+								<span class="value">{{timeOff}}</span>
+							</li>
+						{{/if}}
+						{{#if program}}
+							<li class="add-value">
+								<label for="type{{id}}">Select program</label>
+								<div class="input-group select">
+									<select id="type{{id}}">
+										<option>Program...</option>
+										<option>Baking</option>
+										<option>Аrying</option>
+										<option>Bathroom</option>
+										<option>Outside</option>
+									</select>
+									<button type="button" class="btn success btn-apply">Apply</button>
+								</div>
+								<span class="value program">{{program}}</span>
+							</li>
+						{{/if}}
+					</ul>
+				</div>
+				<div class="row">
+					<div class="btn-holder">
+						<button type="button" class="btn danger" id="delDev">Delete Device</button>
+<!-- 						<button type="button" class="btn primary" id="resetDev">Reset Options</button> -->
+					</div>
+				</div>
+			</div>
+		</script>
+	</body>
+</html>
