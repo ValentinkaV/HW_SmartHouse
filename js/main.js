@@ -72,7 +72,7 @@ function SmartHouse() {
 	var _devices = [];
 
 	this.addDevice = function(device) {
-		device.id = _devices.length;
+		device = _devices.length;
 		_devices.push(device);
 	};
 
